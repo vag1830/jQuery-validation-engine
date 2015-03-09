@@ -1,6 +1,5 @@
 /**
  * TODO: Check for console availability
- * 		 Add onBeforeValidation, onAfterValidation callbacks
  */
 
 (function($) {
@@ -277,14 +276,63 @@
 		},
 
 		isEmail: function (value) {
-			var reg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+			var reg = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 	    	return reg.test(value);
 		},
 
-		isNumeric: function (value) {
+		isUrl: function (value) {
+			var reg = /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
 
-			return true;
+	    	return reg.test(value);
+		},
+
+		isNumber: function (value) {
+			var reg = /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/;
+
+	    	return reg.test(value);
+		},
+
+		digitsOnly: function (value) {
+			var reg = /^\d+$/;
+
+	    	return reg.test(value);
+		},
+
+		lettersOnly: function (value) {
+			var reg = /^[a-z]+$/i;
+
+	    	return reg.test(value);
+		},
+
+		minlength: function (value, length) {
+
+			return value.length >= length;
+		},
+
+		maxlength: function (value, length) {
+
+			return value.length <= length;
+		},
+
+		rangelength: function(value, minLength, maxLength) {
+
+			return value.length <= maxLength && value.length >= minLength;
+		},
+
+		min: function (value, min) {
+
+			return value.length >= length;
+		},
+
+		max: function (value, max) {
+
+			return value.length <= length;
+		},
+
+		range: function (value, min, max) {
+
+			return value <= maxLength && value >= minLength;
 		},
 
 		isAlphaNumeric: function (value) {
@@ -295,19 +343,6 @@
 		match: function (value1, value2) {
 
 	    	return value1 === value2;
-		},
-
-		length: function (value) {
-
-		},
-
-		maxLength: function (value) {
-
-		},
-
-		minLength: function (value) {
-
 		}
-	};
-
+	}
 })($);
